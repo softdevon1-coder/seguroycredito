@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Simulador de Cuotas de Préstamos — Sistema Francés | Seguro y Crédito{% endblock %}
+{% block meta_description %}Calcula la cuota mensual fija, intereses acumulados y saldo deudor para préstamos personales en pesos con el Sistema Francés.{% endblock %}
+
+{% block content %}
+<section class="hero" style="padding: 24px;">
+    <h1>Simulador de Cuotas de Préstamos Personales</h1>
+    <p>Calcula el valor de la cuota mensual fija, el interés total y el desembolso final aplicando el Sistema de Amortización Francés.</p>
+</section>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 30px;">
+    <!-- Formulario de Entrada -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 24px;">
+        <h3 style="color: var(--accent-gold); margin-bottom: 16px; font-size: 1.15rem;">Parámetros del Crédito</h3>
+        
+        <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Monto a Solicitar ($ ARS)</label>
+            <input type="number" id="calc-amount" value="1000000" step="50000" style="width: 100%; background: #0c1427; border: 1px solid var(--border-card); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 1rem;">
+        </div>
+
+        <div style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Plazo de Devolución (Meses)</label>
+            <select id="calc-months" style="width: 100%; background: #0c1427; border: 1px solid var(--border-card); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 1rem;">
+                <option value="6">6 cuotas (Corto plazo)</option>
+                <option value="12" selected>12 cuotas (1 año)</option>
+                <option value="24">24 cuotas (2 años)</option>
+                <option value="36">36 cuotas (3 años)</option>
+                <option value="48">48 cuotas (4 años)</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Tasa Nominal Anual Estimada (TNA %)</label>
+            <input type="number" id="calc-tna" value="48" step="1" style="width: 100%; background: #0c1427; border: 1px solid var(--border-card); color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 1rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Bancos tradicionales rondan entre 42% y 55% TNA para clientes sueldo.</span>
+        </div>
+
+        <button onclick="calculateLoan()" style="width: 100%; background: linear-gradient(135deg, #d97706, #f59e0b); color: #fff; font-weight: 700; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 1rem;">
+            Calcular Cuota Mensual
+        </button>
+    </div>
+
+    <!-- Resultados -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+        <h3 style="color: var(--accent-blue); margin-bottom: 16px; font-size: 1.15rem;">Resumen de la Simulación</h3>
+        
+        <div style="background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Cuota Fija Mensual Estimada</div>
+            <div id="res-monthly" style="font-size: 2rem; font-weight: 800; color: #38bdf8; margin: 6px 0;">$106.840</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Amortización Sistema Francés (Capital + Interés)</div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-card); padding-bottom: 6px;">
+                <span style="color: var(--text-muted);">Capital prestado:</span>
+                <strong id="res-capital" style="color: #fff;">$1.000.000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-card); padding-bottom: 6px;">
+                <span style="color: var(--text-muted);">Intereses totales:</span>
+                <strong id="res-interest" style="color: #f59e0b;">$282.080</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-card); padding-bottom: 6px;">
+                <span style="color: var(--text-muted);">Monto total a devolver:</span>
+                <strong id="res-total" style="color: #10b981;">$1.282.080</strong>
+            </div>
+        </div>
+
+        <div style="margin-top: 16px; font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
+            * Los cálculos son orientativos y no contemplan seguro de vida sobre saldo deudor ni impuestos locales como impuesto a los sellos provincial.
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateLoan() {
+    var p = parseFloat(document.getElementById('calc-amount').value) || 0;
+    var n = parseInt(document.getElementById('calc-months').value) || 12;
+    var tna = parseFloat(document.getElementById('calc-tna').value) || 48;
+
+    var monthlyRate = (tna / 100) / 12;
+    var cuota = 0;
+    if (monthlyRate > 0) {
+        cuota = p * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+    } else {
+        cuota = p / n;
+    }
+
+    var totalPay = cuota * n;
+    var totalInterest = totalPay - p;
+
+    document.getElementById('res-monthly').innerText = '$' + Math.round(cuota).toLocaleString('es-AR');
+    document.getElementById('res-capital').innerText = '$' + Math.round(p).toLocaleString('es-AR');
+    document.getElementById('res-interest').innerText = '$' + Math.round(totalInterest).toLocaleString('es-AR');
+    document.getElementById('res-total').innerText = '$' + Math.round(totalPay).toLocaleString('es-AR');
+}
+window.addEventListener('load', calculateLoan);
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }} — Seguro y Crédito{% endblock %}
+{% block meta_description %}{{ article.subtitle }}{% endblock %}
+
+{% block content %}
+<article>
+    <div style="margin-bottom: 12px;">
+        <span class="card-badge">{{ article.category }}</span>
+    </div>
+    
+    <h1>{{ article.title }}</h1>
+    
+    <div class="article-meta">
+        <span>📅 {{ article.date }}</span>
+        <span>⏱️ {{ article.read_time }}</span>
+        <span>✍️ Equipo de Análisis Financiero</span>
+        <span>🛡️ Seguro y Crédito Argentina</span>
+    </div>
+
+    <div class="article-intro">
+        {{ article.intro }}
+    </div>
+
+    {% for sec in article.sections %}
+        <h2>{{ sec.heading }}</h2>
+        {% for p in sec.paragraphs %}
+            <p>{{ p }}</p>
+        {% endfor %}
+    {% endfor %}
+
+    <div style="margin-top: 32px; padding: 20px; background: rgba(245, 158, 11, 0.05); border: 1px dashed var(--border-card); border-radius: 8px;">
+        <h4 style="color: var(--accent-gold); margin-bottom: 8px;">💡 Recomendación del Asesor</h4>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0;">
+            Antes de contratar cualquier póliza o firmar un contrato crediticio, exija siempre la copia íntegra del cuadro de amortización con CFTEA desagregado o las cláusulas particulares de franquicia de la póliza emitida por la aseguradora autorizada por la SSN.
+        </p>
+    </div>
+</article>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.25rem; color: var(--text-title); margin-bottom: 16px;">Otras Guías y Comparativas Relacionadas</h3>
+</div>
+
+<div class="grid-cards">
+    {% for slug, art in other_articles.items() %}
+    <a href="/articulo/{{ slug }}" class="card">
+        <div>
+            <span class="card-badge">{{ art.category }}</span>
+            <h3>{{ art.title }}</h3>
+            <p>{{ art.subtitle }}</p>
+        </div>
+        <div class="card-footer">
+            Ver guía &rarr; <span style="font-weight: 400; color: var(--text-muted); margin-left: auto;">{{ art.read_time }}</span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

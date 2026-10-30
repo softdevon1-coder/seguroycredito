@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Seguro y Crédito — Comparativas de Seguros, Préstamos y Créditos en Argentina{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Comparativas Independientes de Seguros y Préstamos</h1>
+    <p>Analizamos las pólizas automotor con mejores coberturas de granizo, los préstamos personales con menor Costo Financiero Total (CFT) y las líneas hipotecarias UVA más accesibles de Argentina.</p>
+</section>
+
+<div style="margin-bottom: 24px;">
+    <h2 style="font-size: 1.4rem; color: var(--text-title); margin-bottom: 16px;">Guías Destacadas de Pólizas y Financiamiento</h2>
+</div>
+
+<div class="grid-cards">
+    {% for slug, art in articles.items() %}
+    <a href="/articulo/{{ slug }}" class="card">
+        <div>
+            <span class="card-badge">{{ art.category }}</span>
+            <h3>{{ art.title }}</h3>
+            <p>{{ art.subtitle }}</p>
+        </div>
+        <div class="card-footer">
+            Leer análisis completo &rarr; <span style="font-weight: 400; color: var(--text-muted); margin-left: auto;">{{ art.read_time }}</span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+<section style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 12px; padding: 24px; margin-top: 10px;">
+    <h3 style="font-size: 1.2rem; color: var(--accent-gold); margin-bottom: 12px;">📊 Tasas y Costos de Referencia en Argentina (Octubre 2026)</h3>
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">Resumen comparativo de condiciones crediticias y primas promedio en el mercado financiero local:</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Tipo de Cobertura / Crédito</th>
+                <th>Entidades / Aseguradoras</th>
+                <th>Tasa TNA / Prima Promedio</th>
+                <th>Condición Clave</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Seguro Auto Terceros Completo</strong></td>
+                <td>Federación Patronal, San Cristóbal, La Segunda</td>
+                <td>Desde $38.000 / mes</td>
+                <td>Incluye Granizo e Inundación sin tope</td>
+            </tr>
+            <tr>
+                <td><strong>Préstamo Personal Haberes</strong></td>
+                <td>Banco Nación, Provincia, Galicia</td>
+                <td>TNA 42% a 54% (CFT ~65%)</td>
+                <td>Acreditación de sueldo en cuenta bancaria</td>
+            </tr>
+            <tr>
+                <td><strong>Crédito Hipotecario UVA</strong></td>
+                <td>Banco Hipotecario, Nación, Santander</td>
+                <td>UVA + 4,5% a 8,5% TNA</td>
+                <td>Cuota inicial máxima 25% de ingresos familiares</td>
+            </tr>
+            <tr>
+                <td><strong>Seguro Integral de Hogar</strong></td>
+                <td>Allianz, Zurich, Rivadavia</td>
+                <td>Desde $14.500 / mes</td>
+                <td>Incendio, electrodomésticos y resp. civil</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+{% endblock %}

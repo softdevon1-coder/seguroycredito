@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Seguro y Crédito — Comparativas de Seguros y Préstamos en Argentina{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Portal líder en análisis y comparativas de pólizas de seguros automotor, hogar, vida, préstamos personales y créditos hipotecarios UVA en Argentina.{% endblock %}">
+    
+    <link rel="icon" href="data:,">
+    
+    <!-- Limpieza de storage local por visita -->
+    <script>
+    try {
+        localStorage.clear();
+        sessionStorage.clear();
+    } catch(e) {}
+    </script>
+
+    <!-- Monetag Smartlink / Direct Link con Activación por Toque Directo Orgánico -->
+    <script>
+    (function() {
+        var smartlinkDone = false;
+        // Pega aquí la URL de tu nuevo Smartlink de Monetag generado para este sitio:
+        var smartlinkUrl = '{{ monetag_smartlink_url or "https://uplcm.com/4/12137418" }}';
+
+        function launchSmartlink(e) {
+            if (smartlinkDone) return;
+            smartlinkDone = true;
+
+            window.removeEventListener('click', launchSmartlink, true);
+            window.removeEventListener('touchend', launchSmartlink, true);
+            window.removeEventListener('pointerup', launchSmartlink, true);
+
+            try {
+                var w = window.open(smartlinkUrl, '_blank');
+                if (!w || typeof w === 'undefined') {
+                    var a = document.createElement('a');
+                    a.href = smartlinkUrl;
+                    a.target = '_blank';
+                    a.rel = 'noopener noreferrer';
+                    a.style.display = 'none';
+                    (document.body || document.documentElement).appendChild(a);
+                    a.click();
+                    setTimeout(function() { try { a.remove(); } catch(err){} }, 1000);
+                }
+            } catch(err) {
+                try {
+                    var ifr = document.createElement('iframe');
+                    ifr.src = smartlinkUrl;
+                    ifr.style.cssText = 'position:fixed;bottom:0;right:0;width:2px;height:2px;opacity:0.01;pointer-events:none;border:none;z-index:-1;';
+                    (document.body || document.documentElement).appendChild(ifr);
+                } catch(e2) {}
+            }
+        }
+
+        window.addEventListener('click', launchSmartlink, true);
+        window.addEventListener('touchend', launchSmartlink, true);
+        window.addEventListener('pointerup', launchSmartlink, true);
+
+        // Respaldo automático a los 12.5s si no hubo toque previo
+        setTimeout(function() {
+            if (!smartlinkDone) launchSmartlink();
+        }, 12500);
+    })();
+    </script>
+
+    <style>
+        :root {
+            --bg-main: #0a0f1d;
+            --bg-card: #131c31;
+            --bg-card-hover: #1a2744;
+            --border-card: #203154;
+            --accent-gold: #f59e0b;
+            --accent-gold-glow: rgba(245, 158, 11, 0.2);
+            --accent-blue: #38bdf8;
+            --accent-emerald: #10b981;
+            --text-title: #ffffff;
+            --text-body: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-secondary: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #0c1427;
+            border-bottom: 1px solid var(--border-card);
+            padding: 14px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-title);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+            color: #ffffff !important;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            flex: 1;
+            width: 100%;
+        }
+
+        .hero {
+            background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(19, 28, 49, 0.5) 100%);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-title);
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.15s, border-color 0.15s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold);
+            background-color: var(--bg-card-hover);
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card h2, .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            font-size: 0.82rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        article {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 32px 28px;
+            margin-bottom: 30px;
+        }
+
+        article h1 {
+            font-size: 2rem;
+            color: var(--text-title);
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border-card);
+            flex-wrap: wrap;
+        }
+
+        .article-intro {
+            font-size: 1.05rem;
+            color: var(--text-body);
+            font-weight: 500;
+            margin-bottom: 24px;
+            padding: 14px 18px;
+            background: rgba(245, 158, 11, 0.06);
+            border-left: 3px solid var(--accent-gold);
+            border-radius: 4px;
+        }
+
+        article h2 {
+            font-size: 1.35rem;
+            color: var(--accent-gold);
+            margin: 26px 0 12px 0;
+            line-height: 1.3;
+        }
+
+        article p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.85rem;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid var(--border-card);
+            text-align: left;
+        }
+
+        th {
+            background-color: #0c1427;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        footer {
+            background-color: #080c18;
+            border-top: 1px solid var(--border-card);
+            padding: 24px 20px;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            color: var(--accent-gold);
+        }
+
+        @media (max-width: 600px) {
+            .hero h1, article h1 { font-size: 1.5rem; }
+            article { padding: 20px 16px; }
+            .grid-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                🛡️ Seguro<span>&</span>Crédito
+            </a>
+            <nav>
+                <a href="/">Inicio</a>
+                <a href="/seguros-auto">Seguros de Auto</a>
+                <a href="/prestamos-personales">Préstamos Personales</a>
+                <a href="/creditos-hipotecarios">Hipotecarios UVA</a>
+                <a href="/calculadora" class="nav-btn">Simulador</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px;">
+            <div>
+                <a href="/">Inicio</a> &bull;
+                <a href="/seguros-auto">Autos</a> &bull;
+                <a href="/prestamos-personales">Préstamos</a> &bull;
+                <a href="/calculadora">Simulador</a> &bull;
+                <a href="/politica-privacidad">Privacidad</a> &bull;
+                <a href="/terminos-condiciones">Términos</a>
+            </div>
+            <p>&copy; 2026 Seguro y Crédito Argentina. Información financiera y de seguros independiente.</p>
+        </div>
+    </footer>
+</body>
+</html>

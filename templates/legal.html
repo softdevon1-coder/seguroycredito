@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} — Seguro y Crédito{% endblock %}
+
+{% block content %}
+<article style="max-width: 800px; margin: 0 auto 30px auto;">
+    <h1>{{ title }}</h1>
+    <div class="article-meta">
+        <span>Última actualización: 28 de Octubre, 2026</span>
+    </div>
+
+    {% if type == 'privacidad' %}
+    <h2>1. Compromiso de Privacidad</h2>
+    <p>En Seguro y Crédito (seguroycredito.onrender.com) respetamos la privacidad de nuestros usuarios y visitantes. Este portal opera bajo una estricta política de minimización de datos: no almacenamos contraseñas, no solicitamos números de tarjetas de crédito ni gestionamos fondos de manera directa.</p>
+
+    <h2>2. Datos Técnicos y Métricas</h2>
+    <p>Para garantizar el óptimo funcionamiento técnico, mitigar ataques de denegación de servicio (DDoS) y evaluar la estabilidad de nuestros simuladores, recopilamos temporalmente datos estándar de cabeceras HTTP como dirección IP pública, tipo de navegador y sistema operativo.</p>
+
+    <h2>3. Cookies y Redes Publicitarias</h2>
+    <p>Podemos mostrar contenidos publicitarios gestionados por redes internacionales autorizadas como Monetag. Dichas plataformas pueden emplear identificadores y cookies técnicas anónimas para evitar la duplicidad de anuncios y medir la relevancia de las campañas sin recopilar datos de filiación personal.</p>
+    {% else %}
+    <h2>1. Objeto del Portal</h2>
+    <p>Seguro y Crédito es un sitio informativo, analítico y comparativo de acceso público y gratuito. Nuestro objetivo es brindar educación financiera, comparativas de coberturas de seguros y divulgación de opciones crediticias reguladas en la República Argentina.</p>
+
+    <h2>2. Ausencia de Asesoramiento Vinculante</h2>
+    <p>La información, tablas comparativas y simulaciones provistas tienen carácter exclusivamente orientativo. Seguro y Crédito no es una entidad financiera, banco ni compañía aseguradora. Antes de contratar cualquier producto o servicio, el usuario debe verificar las condiciones contractuales directamente con la entidad autorizada por el BCRA o la Superintendencia de Seguros de la Nación (SSN).</p>
+
+    <h2>3. Limitación de Responsabilidad</h2>
+    <p>No garantizamos la exactitud absoluta ni la vigencia en tiempo real de las tasas de interés o primas de pólizas, dado que las entidades financieras pueden modificarlas sin previo aviso.</p>
+    {% endif %}
+</article>
+{% endblock %}
