@@ -73,6 +73,10 @@ def privacy():
 def terms():
     return render_template('legal.html', title='Términos y Condiciones de Uso', type='terminos', monetag_smartlink_url=DEFAULT_SMARTLINK)
 
+@app.route('/3e06956c5ba3d432b38f.txt')
+def hilltop_verify():
+    return Response('46d2fd1e12cf51c06d3e', mimetype='text/plain')
+
 @app.route('/api/ip')
 def get_ip():
     """
