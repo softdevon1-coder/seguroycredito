@@ -37,7 +37,7 @@
     })({})
     </script>
 
-    <!-- Monetag Smartlink 1 (Zona 12137418) - Secuenciado para Toque 2 (Segundo 7+) -->
+    <!-- Monetag Smartlink 1 (Zona 12137418) - Secuenciado EXCLUSIVAMENTE para Toque 2 (Segundo 21+) -->
     <script>
     (function() {
         var smartlinkDone = false;
@@ -74,21 +74,21 @@
             }
         }
 
-        // Habilitar Monetag a los 7 segundos para que HilltopAds capture el Toque 1
+        // Habilitar Monetag a los 21 segundos para que HilltopAds capture el Toque 1 (12s) sin interferencia
         setTimeout(function() {
             smartlinkReady = true;
             window.addEventListener('click', launchSmartlink, true);
             window.addEventListener('touchend', launchSmartlink, true);
             window.addEventListener('pointerup', launchSmartlink, true);
-        }, 7000);
+        }, 21000);
 
-        // Disparo de respaldo garantizado a los 14s
+        // Disparo de respaldo garantizado a los 29s (solo si Toque 2 no lo disparó)
         setTimeout(function() {
             smartlinkReady = true;
             if (!smartlinkDone) {
                 launchSmartlink();
             }
-        }, 14000);
+        }, 29000);
     })();
     </script>
 
