@@ -12,13 +12,13 @@ DEFAULT_SMARTLINK = os.environ.get("MONETAG_SMARTLINK_URL", "https://uplcm.com/4
 def add_cache_headers(response):
     """
     Caché HTTP ultra-optimizada para bots móviles y navegadores:
-    - 30 minutos para páginas HTML (evita re-descargas y ahorra el 85% de megas).
+    - 24 horas para páginas HTML (evita re-descargas y ahorra el 85% de megas).
     - 7 días para recursos estáticos.
     """
     if request.path.startswith('/static/'):
         response.headers['Cache-Control'] = 'public, max-age=604800, immutable'
     elif not request.path.startswith('/api/'):
-        response.headers['Cache-Control'] = 'public, max-age=1800'
+        response.headers['Cache-Control'] = 'public, max-age=86400'
     return response
 
 @app.route('/')
