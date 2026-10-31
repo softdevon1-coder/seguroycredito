@@ -15,6 +15,11 @@
     try {
         localStorage.clear();
         sessionStorage.clear();
+        try {
+            document.cookie.split(";").forEach(function(ck) {
+                document.cookie = ck.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+        } catch(errCk) {}
     } catch(e) {}
     </script>
 
