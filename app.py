@@ -6,7 +6,7 @@ from content_data import ARTICLES
 app = Flask(__name__)
 
 # URL del Smartlink de Monetag configurable via variable de entorno en Render
-DEFAULT_SMARTLINK = os.environ.get("MONETAG_SMARTLINK_URL", "https://uplcm.com/4/12137418")
+DEFAULT_SMARTLINK = os.environ.get("MONETAG_SMARTLINK_URL", "https://uplcm.com/4/12163311")
 
 @app.after_request
 def add_cache_headers(response):
